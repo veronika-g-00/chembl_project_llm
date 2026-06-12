@@ -1,0 +1,94 @@
+{
+  "model": "ExtraTreesRegressor",
+  "target": "BACE1 (CHEMBL4822) pIC50 regression",
+  "seed": 42,
+  "n_estimators": 250,
+  "features": {
+    "morgan_radius": 2,
+    "morgan_bits": 2048,
+    "descriptors": [
+      "mw",
+      "logp",
+      "tpsa",
+      "hbd",
+      "hba",
+      "rotatable_bonds",
+      "heavy_atoms"
+    ],
+    "total_features": 2055
+  },
+  "split": {
+    "method": "Bemis-Murcko scaffold split",
+    "train_rows": 6440,
+    "validation_rows": 805,
+    "test_rows": 805,
+    "train_scaffolds": 1242,
+    "validation_scaffolds": 805,
+    "test_scaffolds": 805
+  },
+  "metrics": {
+    "dummy": {
+      "validation": {
+        "mae": 1.1381951570510864,
+        "rmse": 1.369677559435537,
+        "r2": -0.08458662033081055
+      },
+      "test": {
+        "mae": 1.0970743894577026,
+        "rmse": 1.3339514888881947,
+        "r2": -0.08581995964050293
+      }
+    },
+    "extra_trees": {
+      "train": {
+        "mae": 0.07506794177169551,
+        "rmse": 0.26540684249763213,
+        "r2": 0.951357810989368
+      },
+      "validation": {
+        "mae": 0.6152807215465126,
+        "rmse": 0.8072232591355659,
+        "r2": 0.6232832687138882
+      },
+      "test": {
+        "mae": 0.5869698425231232,
+        "rmse": 0.7766742646534719,
+        "r2": 0.6319086815184712
+      }
+    }
+  },
+  "grouped_permutation_importance": {
+    "morgan_fingerprint": {
+      "mae_increase_mean": 0.695475525767514,
+      "mae_increase_std": 0.01596908888764113
+    },
+    "heavy_atoms": {
+      "mae_increase_mean": 0.0039318008371963305,
+      "mae_increase_std": 0.0007784971963082637
+    },
+    "mw": {
+      "mae_increase_mean": 0.0025776515354975827,
+      "mae_increase_std": 0.0007042334755133292
+    },
+    "tpsa": {
+      "mae_increase_mean": 0.0014338122674272702,
+      "mae_increase_std": 0.0003409933667199175
+    },
+    "logp": {
+      "mae_increase_mean": 0.001250503172453965,
+      "mae_increase_std": 0.00023288845695954756
+    },
+    "hba": {
+      "mae_increase_mean": 0.0010252943365493428,
+      "mae_increase_std": 0.000743677914195139
+    },
+    "rotatable_bonds": {
+      "mae_increase_mean": 0.00031583616803516624,
+      "mae_increase_std": 0.0002207874553760212
+    },
+    "hbd": {
+      "mae_increase_mean": 0.00014422188245886148,
+      "mae_increase_std": 0.000208904184117494
+    }
+  }
+}

@@ -1,0 +1,90 @@
+RAW DATA INFO
+================================================================================
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 10609 entries, 0 to 10608
+Data columns (total 18 columns):
+ #   Column                 Non-Null Count  Dtype  
+---  ------                 --------------  -----  
+ 0   activity_id            10609 non-null  int64  
+ 1   assay_id               10609 non-null  int64  
+ 2   doc_id                 10609 non-null  int64  
+ 3   molregno               10609 non-null  int64  
+ 4   canonical_smiles       10609 non-null  object 
+ 5   standard_inchi_key     10609 non-null  object 
+ 6   standard_value         10609 non-null  float64
+ 7   standard_units         10609 non-null  object 
+ 8   standard_relation      10609 non-null  object 
+ 9   pic50                  10609 non-null  float64
+ 10  potential_duplicate    10609 non-null  int64  
+ 11  data_validity_comment  0 non-null      float64
+ 12  confidence_score       10609 non-null  int64  
+ 13  assay_type             10609 non-null  object 
+ 14  target_chembl_id       10609 non-null  object 
+ 15  target_name            10609 non-null  object 
+ 16  target_organism        10609 non-null  object 
+ 17  target_type            10609 non-null  object 
+dtypes: float64(3), int64(6), object(9)
+memory usage: 1.5+ MB
+
+
+RAW DATA DESCRIBE
+================================================================================
+         activity_id      assay_id         doc_id      molregno                                                                                                                                                  canonical_smiles           standard_inchi_key  standard_value standard_units standard_relation         pic50  potential_duplicate  data_validity_comment  confidence_score assay_type target_chembl_id       target_name target_organism     target_type
+count   1.060900e+04  1.060900e+04   10609.000000  1.060900e+04                                                                                                                                                             10609                        10609    1.060900e+04          10609             10609  10609.000000              10609.0                    0.0      10609.000000      10609            10609             10609           10609           10609
+unique           NaN           NaN            NaN           NaN                                                                                                                                                              8079                         8080             NaN              1                 1           NaN                  NaN                    NaN               NaN          2                1                 1               1               1
+top              NaN           NaN            NaN           NaN  CC(C)C[C@H](NC(=O)[C@H](CC(N)=O)NC(=O)[C@@H](NC(=O)[C@@H](N)CCC(=O)O)C(C)C)[C@@H](O)C[C@@H](C)C(=O)N[C@@H](C)C(=O)N[C@@H](CCC(=O)O)C(=O)N[C@@H](Cc1ccccc1)C(=O)O  NIOCOJFPGCXNKL-ZKZXETMPSA-N             NaN             nM                 =           NaN                  NaN                    NaN               NaN          B       CHEMBL4822  Beta-secretase 1    Homo sapiens  SINGLE PROTEIN
+freq             NaN           NaN            NaN           NaN                                                                                                                                                                14                           14             NaN          10609             10609           NaN                  NaN                    NaN               NaN      10591            10609             10609           10609           10609
+mean    1.543930e+07  1.450210e+06   89000.931002  1.819588e+06                                                                                                                                                               NaN                          NaN    5.654833e+03            NaN               NaN      6.829671                  0.0                    NaN          8.712508        NaN              NaN               NaN             NaN             NaN
+std     8.167643e+06  6.924625e+05   31193.173052  8.465408e+05                                                                                                                                                               NaN                          NaN    5.168170e+04            NaN               NaN      1.238731                  0.0                    NaN          0.452614        NaN              NaN               NaN             NaN             NaN
+min     7.885700e+04  4.137200e+04    5924.000000  1.480000e+02                                                                                                                                                               NaN                          NaN    1.100000e-02            NaN               NaN      2.540000                  0.0                    NaN          8.000000        NaN              NaN               NaN             NaN             NaN
+25%     1.094397e+07  8.261220e+05   62414.000000  1.343213e+06                                                                                                                                                               NaN                          NaN    1.800000e+01            NaN               NaN      5.900000                  0.0                    NaN          8.000000        NaN              NaN               NaN             NaN             NaN
+50%     1.766684e+07  1.528394e+06   94725.000000  2.003378e+06                                                                                                                                                               NaN                          NaN    1.180000e+02            NaN               NaN      6.930000                  0.0                    NaN          9.000000        NaN              NaN               NaN             NaN             NaN
+75%     1.847355e+07  1.748603e+06  107756.000000  2.246516e+06                                                                                                                                                               NaN                          NaN    1.270000e+03            NaN               NaN      7.750000                  0.0                    NaN          9.000000        NaN              NaN               NaN             NaN             NaN
+max     2.898250e+07  2.596491e+06  135782.000000  3.282684e+06                                                                                                                                                               NaN                          NaN    2.854000e+06            NaN               NaN     10.960000                  0.0                    NaN          9.000000        NaN              NaN               NaN             NaN             NaN
+
+MODELING DATA INFO
+================================================================================
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 8050 entries, 0 to 8049
+Data columns (total 21 columns):
+ #   Column                        Non-Null Count  Dtype  
+---  ------                        --------------  -----  
+ 0   standardized_smiles           8050 non-null   object 
+ 1   pic50                         8050 non-null   float64
+ 2   n_measurements                8050 non-null   int64  
+ 3   n_assays                      8050 non-null   int64  
+ 4   n_documents                   8050 non-null   int64  
+ 5   n_molregno                    8050 non-null   int64  
+ 6   pic50_min                     8050 non-null   float64
+ 7   pic50_max                     8050 non-null   float64
+ 8   pic50_std                     8050 non-null   float64
+ 9   pic50_range                   8050 non-null   float64
+ 10  high_measurement_variability  8050 non-null   bool   
+ 11  scaffold                      8050 non-null   object 
+ 12  mw                            8050 non-null   float64
+ 13  logp                          8050 non-null   float64
+ 14  tpsa                          8050 non-null   float64
+ 15  hbd                           8050 non-null   int64  
+ 16  hba                           8050 non-null   int64  
+ 17  rotatable_bonds               8050 non-null   int64  
+ 18  heavy_atoms                   8050 non-null   int64  
+ 19  target_chembl_id              8050 non-null   object 
+ 20  target_organism               8050 non-null   object 
+dtypes: bool(1), float64(8), int64(8), object(4)
+memory usage: 1.2+ MB
+
+
+MODELING DATA DESCRIBE
+================================================================================
+             standardized_smiles        pic50  n_measurements     n_assays  n_documents   n_molregno    pic50_min    pic50_max    pic50_std  pic50_range high_measurement_variability                              scaffold           mw         logp         tpsa          hbd          hba  rotatable_bonds  heavy_atoms target_chembl_id target_organism
+count                       8050  8050.000000     8050.000000  8050.000000  8050.000000  8050.000000  8050.000000  8050.000000  8050.000000  8050.000000                         8050                                  8050  8050.000000  8050.000000  8050.000000  8050.000000  8050.000000      8050.000000  8050.000000             8050            8050
+unique                      8050          NaN             NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN                            2                                  2852          NaN          NaN          NaN          NaN          NaN              NaN          NaN                1               1
+top     c1cnc2ncc(-c3ccncc3)n2c1          NaN             NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN                        False  O=C(Nc1cccc(C2N=COC3CC32)c1)c1ccccn1          NaN          NaN          NaN          NaN          NaN              NaN          NaN       CHEMBL4822    Homo sapiens
+freq                           1          NaN             NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN                         7467                                   166          NaN          NaN          NaN          NaN          NaN              NaN          NaN             8050            8050
+mean                         NaN     6.748610        1.317888     1.282236     1.057888     1.003727     6.647908     6.846272     0.132363     0.198364                          NaN                                   NaN   464.492385     3.564975    98.543463     2.135776     5.866957         5.924969    32.686708              NaN             NaN
+std                          NaN     1.232278        0.651415     0.580971     0.314282     0.060937     1.224853     1.281665     0.317360     0.484064                          NaN                                   NaN   122.955653     1.385318    50.338590     1.842156     2.071480         5.260073     8.772181              NaN             NaN
+min                          NaN     2.540000        1.000000     1.000000     1.000000     1.000000     2.540000     2.540000     0.000000     0.000000                          NaN                                   NaN   126.111000   -10.027700     4.930000     0.000000     1.000000         0.000000     9.000000              NaN             NaN
+25%                          NaN     5.820000        1.000000     1.000000     1.000000     1.000000     5.732500     5.870000     0.000000     0.000000                          NaN                                   NaN   397.425000     2.783170    73.390000     1.000000     5.000000         3.000000    28.000000              NaN             NaN
+50%                          NaN     6.850000        1.000000     1.000000     1.000000     1.000000     6.720000     6.960000     0.000000     0.000000                          NaN                                   NaN   443.753000     3.518250    91.850000     2.000000     6.000000         4.000000    31.000000              NaN             NaN
+75%                          NaN     7.680000        2.000000     1.000000     1.000000     1.000000     7.580000     7.820000     0.028284     0.040000                          NaN                                   NaN   502.646000     4.316805   111.720000     2.000000     7.000000         7.000000    35.000000              NaN             NaN
+max                          NaN    10.960000       14.000000    14.000000    14.000000     2.000000    10.960000    10.960000     3.160767     4.870000                          NaN                                   NaN  3052.577000    11.609400  1010.420000    32.000000    43.000000        93.000000   219.000000              NaN             NaN

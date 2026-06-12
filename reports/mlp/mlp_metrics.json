@@ -1,0 +1,64 @@
+{
+  "model": "BACE1MLP",
+  "target": "BACE1 (CHEMBL4822) pIC50 regression",
+  "architecture": {
+    "input_dim": 2055,
+    "hidden_dims": [
+      256,
+      128
+    ],
+    "activation": "ReLU",
+    "batch_norm": false,
+    "dropout": false
+  },
+  "training": {
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "weight_decay": 1e-05,
+    "loss": "MSE on standardized pIC50",
+    "batch_size": 128,
+    "maximum_epochs": 100,
+    "epochs_completed": 19,
+    "best_epoch": 4,
+    "early_stopping_patience": 15,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "features": {
+    "morgan_radius": 2,
+    "morgan_bits": 2048,
+    "descriptors": [
+      "mw",
+      "logp",
+      "tpsa",
+      "hbd",
+      "hba",
+      "rotatable_bonds",
+      "heavy_atoms"
+    ],
+    "descriptor_scaling_fit_on": "train only",
+    "total_features": 2055
+  },
+  "split": {
+    "train": 6440,
+    "validation": 805,
+    "test": 805
+  },
+  "metrics": {
+    "train": {
+      "mae": 0.35452184081077576,
+      "rmse": 0.4811531557757999,
+      "r2": 0.8401342034339905
+    },
+    "validation": {
+      "mae": 0.6099253296852112,
+      "rmse": 0.8061420664140847,
+      "r2": 0.6242917776107788
+    },
+    "test": {
+      "mae": 0.6028265953063965,
+      "rmse": 0.791919935437331,
+      "r2": 0.6173160076141357
+    }
+  }
+}

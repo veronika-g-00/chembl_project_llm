@@ -1,5 +1,13 @@
 .venv/
 __pycache__/
+*.py[cod]
+.pytest_cache/
+.idea/
+.vscode/
 *.db
 *.parquet
+data/raw/
+data/processed/
+artifacts/baseline/
+*.log
 .DS_Store

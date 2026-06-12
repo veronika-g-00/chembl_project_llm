@@ -1,113 +1,69 @@
-# ChEMBL - ML project
+# Przewidywanie aktywności inhibitorów BACE1
 
-Projekt przetwarza dane o związkach chemicznych z bazy ChEMBL w celu przygotowania ich do analizy z wykorzystaniem uczenia maszynowego.
+Projekt służy do przewidywania aktywności związków chemicznych wobec
+ludzkiego białka BACE1 (`CHEMBL4822`). Na podstawie zapisu SMILES modele
+wyznaczają przewidywane `pIC50`.
 
----
+W projekcie wykorzystano dane ChEMBL 36, bibliotekę RDKit, modele ExtraTrees,
+MLP i GNN oraz interfejs Streamlit. Aplikacja pokazuje strukturę 2D cząsteczki
+i przekazuje wyniki do lokalnego modelu językowego.
 
-## Cel projektu
+## Wymagania
 
-Celem projektu jest przygotowanie danych o aktywności związków chemicznych z bazy ChEMBL do dalszej analizy oraz wykorzystania w modelach uczenia maszynowego. W tym celu surowe dane IC50 są standaryzowane poprzez ujednolicenie jednostek, przeliczane do postaci pIC50 oraz poddawane procesowi czyszczenia, który obejmuje usuwanie braków, niepoprawnych wartości i duplikatów.
+- Python 3.11,
+- Ollama,
+- około 8 GB wolnego miejsca na model `gemma4:e2b`.
 
-## Pipeline wykorzystuje:
+Baza `chembl_36.db` nie jest potrzebna do uruchomienia gotowej aplikacji.
+Jest wymagana tylko do ponownego wykonania ekstrakcji i treningu.
 
-- **Apache Spark**– do przetwarzania danych w sposób rozproszony
-- **Apache Airflow** – do orkiestracji pipeline’u
-- **Docker** – do uruchamiania infrastruktury
-- **Parquet** – jako docelowy format danych
+## Instalacja
 
-## Wymagania:
-
-- Python 3.9+
-- Docker Desktop
-- min. 8 GB RAM
-- projekt korzysta z bazy ChEMBL 36 w formacie SQLite (ok 28 GB)
-
----
-
-## Struktura projektu
-
-```
-PyCharmMiscProject/
-│
-├── chembl_36.db                    # Baza danych ChEMBL (28GB SQLite)
-│
-├── requirements.txt                # Wymagane pakiety Pythona
-├── README.md
-│
-├── export_to_parquet.py           # Skrypt: konwersja SQLite → Parquet
-├── spark_etl_job.py               # Skrypt: przetwarzanie danych w Spark
-│
-├── libs/                          # Kod biblioteki Python
-│   ├── __init__.py
-│   ├── data_processing.py         # Funkcje ładowania i przetwarzania danych
-│   └── datasets/                  # Pliki danych
-│       ├── chembl_raw.parquet         # Wyeksportowane dane surowe
-│       ├── chembl_sample.parquet      # Mała próbka do testów
-│       └── chembl_processed.parquet/  # Końcowy wynik przetwarzania
-│
-├── notebooks/                     # Notebooki Jupyter
-│   └── eda.ipynb                  # Eksploracyjna analiza danych
-│
-└── spark_airflow/                 # Konfiguracja infrastruktury
-    ├── DockerCompose.yml          # Konfiguracja Docker
-    ├── local_cluster.yml          # Alternatywny skrypt konfiguracji
-    └── dags/                      # Definicje DAG w Airflow
-        └── chembl_etl_dag.py      # Konfiguracja harmonogramu pipeline
-
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+ollama pull gemma4:e2b
 ```
 
----
+## Uruchomienie aplikacji
 
-## Instalacja i uruchomienie
+Uruchom Ollamę, a następnie w katalogu projektu wykonaj:
 
-### Środowisko Python
-
-```bash
-python -m venv .venv
-source .venv/bin/activate   # macOS/Linux
-pip install -r requirements.txt
+```powershell
+py -3.11 -m streamlit run app.py
 ```
 
-### Uruchomienie infrastruktury
+Aplikacja otworzy się pod adresem `http://localhost:8501`.
+Pierwsza odpowiedź LLM może pojawić się po około 1-2 minutach.
 
-```bash
-cd spark_airflow
-docker compose -f DockerCompose.yml up -d
+## Ponowne wykonanie pipeline'u
+
+Po umieszczeniu bazy `chembl_36.db` w głównym katalogu:
+
+```powershell
+py -3.11 scripts\extract_bace1.py
+py -3.11 scripts\run_eda.py
+py -3.11 scripts\train_baseline.py
+py -3.11 scripts\train_mlp.py
+py -3.11 scripts\train_gnn.py
 ```
 
-### Uruchomienie pipeline’u
+## Wyniki
 
-1. Eksport danych
+Wyniki na zbiorze testowym utworzonym metodą scaffold split:
 
-```bash
-python export_to_parquet.py --limit 50000
-```
+| Model | MAE | RMSE | R2 |
+|---|---:|---:|---:|
+| ExtraTrees | 0,587 | 0,777 | 0,632 |
+| MLP | 0,603 | 0,792 | 0,617 |
+| GNN | 0,662 | 0,852 | 0,557 |
 
-lub pełny eksport:
+Opis danych, przygotowania modeli i wyników znajduje się w
+[`docs/DOKUMENTACJA.md`](docs/DOKUMENTACJA.md).
 
-```bash
-python export_to_parquet.py
-```
+## Testy
 
-Powstaje plik:
-
-```bash
-libs/datasets/chembl_raw.parquet
-```
-
-2. Przetwarzanie w Spark
-
-```bash
-docker exec spark-master bash -c "cd /opt/workspace && /opt/spark/bin/spark-submit \
---master spark://spark-master:7077 \
---driver-memory 1g \
---executor-memory 1g \
-spark_etl_job.py \
---input /opt/workspace/libs/datasets/chembl_raw.parquet \
---output /opt/workspace/libs/datasets/chembl_processed.parquet"
-```
-
-Efekt:
-```bash
-libs/datasets/chembl_processed.parquet
+```powershell
+py -3.11 -m unittest discover -s tests -v
 ```

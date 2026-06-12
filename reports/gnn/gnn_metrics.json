@@ -1,0 +1,73 @@
+{
+  "model": "BACE1GNN with GINEConv",
+  "target": "BACE1 (CHEMBL4822) pIC50 regression",
+  "architecture": {
+    "node_feature_dim": 44,
+    "edge_feature_dim": 14,
+    "hidden_dim": 64,
+    "graph_layers": 3,
+    "pooling": "concatenated global mean and max",
+    "batch_norm": false,
+    "dropout": false
+  },
+  "training": {
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "weight_decay": 1e-05,
+    "loss": "MSE on standardized pIC50",
+    "batch_size": 64,
+    "maximum_epochs": 60,
+    "epochs_completed": 60,
+    "best_epoch": 53,
+    "early_stopping_patience": 10,
+    "seed": 42,
+    "device": "cpu"
+  },
+  "features": {
+    "source": "RDKit molecular graph",
+    "node_features": [
+      "atomic number",
+      "degree",
+      "formal charge",
+      "hybridization",
+      "aromaticity",
+      "total hydrogens",
+      "chirality",
+      "ring membership"
+    ],
+    "edge_features": [
+      "bond type",
+      "conjugation",
+      "ring membership",
+      "stereochemistry"
+    ],
+    "bidirectional_edges": true
+  },
+  "target_scaling": {
+    "fit_on": "train only",
+    "mean": 6.824362577639751,
+    "std": 1.2033876715121328
+  },
+  "split": {
+    "train": 6440,
+    "validation": 805,
+    "test": 805
+  },
+  "metrics": {
+    "train": {
+      "mae": 0.5152113437652588,
+      "rmse": 0.6680443258084092,
+      "r2": 0.6918235421180725
+    },
+    "validation": {
+      "mae": 0.668735146522522,
+      "rmse": 0.8685622787744313,
+      "r2": 0.5638563632965088
+    },
+    "test": {
+      "mae": 0.6619312763214111,
+      "rmse": 0.8520265767067075,
+      "r2": 0.5570200681686401
+    }
+  }
+}

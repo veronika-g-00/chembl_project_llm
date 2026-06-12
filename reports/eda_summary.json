@@ -1,0 +1,91 @@
+{
+  "software": {
+    "pandas": "2.2.3",
+    "rdkit": "2026.03.3"
+  },
+  "raw_data": {
+    "rows": 10609,
+    "columns": 18,
+    "missing_values": {
+      "activity_id": 0,
+      "assay_id": 0,
+      "doc_id": 0,
+      "molregno": 0,
+      "canonical_smiles": 0,
+      "standard_inchi_key": 0,
+      "standard_value": 0,
+      "standard_units": 0,
+      "standard_relation": 0,
+      "pic50": 0,
+      "potential_duplicate": 0,
+      "data_validity_comment": 10609,
+      "confidence_score": 0,
+      "assay_type": 0,
+      "target_chembl_id": 0,
+      "target_name": 0,
+      "target_organism": 0,
+      "target_type": 0
+    },
+    "exact_duplicate_rows": 0,
+    "duplicate_activity_ids": 0,
+    "unique_raw_smiles": 8079,
+    "pic50": {
+      "count": 10609.0,
+      "mean": 6.829671034027712,
+      "std": 1.2387307000925911,
+      "min": 2.54,
+      "25%": 5.9,
+      "50%": 6.93,
+      "75%": 7.75,
+      "max": 10.96
+    },
+    "pic50_iqr_outliers": {
+      "q1": 5.9,
+      "q3": 7.75,
+      "iqr": 1.8499999999999996,
+      "lower_bound": 3.125000000000001,
+      "upper_bound": 10.524999999999999,
+      "outlier_count": 14
+    }
+  },
+  "chemical_quality": {
+    "invalid_smiles": 0,
+    "rows_changed_by_standardization": 130,
+    "unique_standardized_smiles": 8050,
+    "unique_scaffolds": 2852,
+    "acyclic_structures": 20,
+    "largest_scaffold_group": 166,
+    "molecules_mw_above_1000": 21
+  },
+  "repeated_measurements": {
+    "structures_with_repeats": 2150,
+    "structures_with_pic50_range_above_0_5": 1172,
+    "structures_with_pic50_range_above_1_0": 583,
+    "structures_with_pic50_range_above_2_0": 114,
+    "median_pic50_range": 0.5800000000000001,
+    "maximum_pic50_range": 4.870000000000001
+  },
+  "modeling_data": {
+    "rows": 8050,
+    "pic50": {
+      "count": 8050.0,
+      "mean": 6.748609937888198,
+      "std": 1.2322775864608577,
+      "min": 2.54,
+      "25%": 5.82,
+      "50%": 6.85,
+      "75%": 7.68,
+      "max": 10.96
+    },
+    "high_measurement_variability": 583
+  },
+  "descriptor_pic50_correlations": {
+    "mw": 0.08982617999675256,
+    "logp": -0.004112511693766699,
+    "tpsa": 0.06290420766100194,
+    "hbd": -0.09786632329710021,
+    "hba": 0.15599540031262701,
+    "rotatable_bonds": -0.11415585857926557,
+    "heavy_atoms": 0.09502098331252673
+  }
+}
