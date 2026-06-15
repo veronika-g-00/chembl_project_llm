@@ -7,8 +7,7 @@ białka BACE1. Białko to występuje u człowieka i w bazie ChEMBL ma identyfika
 `CHEMBL4822`.
 
 Wejściem systemu jest struktura cząsteczki zapisana jako SMILES. Wynikiem jest
-przewidywane `pIC50`. Wyższa wartość `pIC50` oznacza niższe `IC50`, czyli
-silniejszą przewidywaną aktywność związku.
+przewidywane `pIC50`.
 
 ## 2. Dane
 
@@ -30,9 +29,6 @@ Powtórzenia tej samej struktury agregowano za pomocą mediany `pIC50`. Mediana
 jest mniej wrażliwa na pojedyncze nietypowe wyniki niż średnia.
 
 ## 3. Analiza danych
-
-W danych nie znaleziono braków w kolumnach potrzebnych do modelowania ani
-niepoprawnych zapisów SMILES. Nie było też identycznych wierszy.
 
 Najważniejsze obserwacje:
 
@@ -148,11 +144,4 @@ Aplikacja Streamlit przyjmuje SMILES, sprawdza jego poprawność i wyświetla:
 Użytkownik może również zadać pytanie lokalnemu modelowi językowemu
 `gemma4:e2b`, uruchamianemu przez Ollama. LLM otrzymuje predykcje, deskryptory
 oraz informacje o zastosowanych modelach i na tej podstawie przygotowuje
-krótką interpretację. Rozwiązanie działa lokalnie i nie wymaga klucza API.
-
-## 9. Ograniczenia
-
-Predykcje dotyczą tylko aktywności wobec BACE1 i nie określają bezpieczeństwa,
-toksyczności ani skuteczności klinicznej związku. Wyniki modelu powinny być
-traktowane jako pomoc w analizie danych, a nie jako zamiennik badań
-laboratoryjnych.
+krótką interpretację.
