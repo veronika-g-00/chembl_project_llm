@@ -14,9 +14,6 @@ i przekazuje wyniki do lokalnego modelu językowego.
 - Ollama,
 - około 8 GB wolnego miejsca na model `gemma4:e2b`.
 
-Baza `chembl_36.db` nie jest potrzebna do uruchomienia gotowej aplikacji.
-Jest wymagana tylko do ponownego wykonania ekstrakcji i treningu.
-
 ## Instalacja
 
 ```powershell
@@ -35,7 +32,6 @@ py -3.11 -m streamlit run app.py
 ```
 
 Aplikacja otworzy się pod adresem `http://localhost:8501`.
-Pierwsza odpowiedź LLM może pojawić się po około 1-2 minutach.
 
 ## Ponowne wykonanie pipeline'u
 
